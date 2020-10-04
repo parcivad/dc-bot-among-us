@@ -1,0 +1,16 @@
+{
+  "name": "dc-bot-among-us",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ../js/main.js debug",
+    "start": "node ../js/main.js "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
