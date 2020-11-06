@@ -35,14 +35,14 @@ module.exports = {
                 Embed.createFields(
                     msg.channel,
                     color.red,
-                    "No Game is on your Tag running!// //Create a game with ^create OR//the Mod in your game: :man_police_officer:" + msg.member.user.username + "//can give you Mod Permissions",
+                    "No Game is running on your tag! The Owner of your AmongUs Channel can give you mod with: ^mod @User",
                     ":rotating_light: Game Info",
                     "error"
                 );
 
             }
 
-        } else if ( args[0] === "to" && args.length === 2) {
+        } else if (args.length === 1) {
 
             if ( msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
 
@@ -68,7 +68,7 @@ module.exports = {
                 Embed.createFields(
                     msg.channel,
                     color.red,
-                    "No Game is on your Tag running!// //Create a game with ^create OR//the Mod in your game: :man_police_officer:" + msg.member.user.username + "//can give you Mod Permissions",
+                    "No Game is running on your tag! The Owner of your AmongUs Channel can give you mod with: ^mod @User",
                     ":rotating_light: Game Info",
                     "error"
                 );
@@ -100,7 +100,7 @@ module.exports = {
                 Embed.createFields(
                     msg.channel,
                     color.red,
-                    "No Game is on your Tag running!// //Create a game with ^create OR//the Mod in your game: :man_police_officer:" + msg.member.user.username + "//can give you Mod Permissions",
+                    "No Game is running on your tag! The Owner of your AmongUs Channel can give you mod with: ^mod @User",
                     ":rotating_light: Game Info",
                     "error"
                 );

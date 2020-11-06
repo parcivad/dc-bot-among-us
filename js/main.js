@@ -57,7 +57,7 @@ client.on('message', (msg) => {
         chan = msg.channel,
         guild = msg.guild
 
-    if (author.id != client.user.id && cont.startsWith(config.prefix)) {
+    if ( author.id != client.user.id && cont.startsWith(config.prefix)){
 
         var invoke = cont.split(' ')[0].substr(config.prefix.length),
             args = cont.split(' ').slice(1)

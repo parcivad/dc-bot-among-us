@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-
+/*
 // Adding Json
 const fs = require('fs')
 const color = JSON.parse(fs.readFileSync('../json/color.json'))
@@ -43,3 +43,5 @@ module.exports = {
         }
     }
 }
+
+*/
