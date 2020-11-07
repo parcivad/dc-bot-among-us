@@ -12,6 +12,10 @@ The Command `mod` is for manage the mute permissions for this Channel
 
 `map` is just a little Feature wich show the User a tactical map of the game map.
 
+## Settings
+You can set `colored output`for the console on true or false in 
+`json/config.json`!
+
 ## Commands:
 ```
 create
