@@ -15,6 +15,7 @@ const Create = require("./modules/commands/create.js");
 const Delete = require("./modules/commands/delete.js");
 const Mod = require("./modules/commands/mod.js");
 const Mute = require("./modules/commands/mute.js");
+const Offline = require("./modules/commands/offline.js");
 
 // If client is ready it will put out informations in the console
 client.on('ready', () => {
@@ -32,6 +33,7 @@ client.on('ready', () => {
 })
 
 
+
 // Command Map for functions
 const cmdmap = {
     create: cmd_create,
@@ -40,6 +42,7 @@ const cmdmap = {
     delete: cmd_delete,
     mod: cmd_mod,
     mute: cmd_mute,
+    offline: cmd_offline,
 }
 // Functions for the command map
 function cmd_help(msg, args) {Help.command(msg, args);}
@@ -48,6 +51,7 @@ function cmd_create(msg, args) {Create.command(msg, args);}
 function cmd_delete(msg, args) {Delete.command(msg, args);}
 function cmd_mod(msg, args) {Mod.command(msg, args);}
 function cmd_mute(msg, args) {Mute.command(msg, args);}
+function cmd_offline(msg, args) {Offline.command(msg, args);}
 
 // waiting for the event: message
 client.on('message', (msg) => {

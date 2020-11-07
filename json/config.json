@@ -1,4 +1,5 @@
 {
-  "token": "put here your token",
-  "prefix": "bot prefix"
+  "token": "put here your token in",
+  "prefix": "the bot prefix",
+  "everyoneRoleId": "a Role that everyone has"
 }

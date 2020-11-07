@@ -3,6 +3,7 @@ const Discord = require('discord.js')
 // Adding Json
 const fs = require('fs')
 const color = JSON.parse(fs.readFileSync('../json/color.json'))
+const config = JSON.parse(fs.readFileSync('../json/config.json'))
 
 // Adding JS
 const Embed = require('../tools/embed.js');
@@ -21,6 +22,12 @@ module.exports = {
                 type: 'voice',
                 parent: msg.guild.channels.cache.find(c => c.name == "▬▬ Among Us ▬▬" && c.type == "category"),
                 userLimit: 10,
+                permissionOverwrites: [
+                    {
+                        id: config.everyoneRoleId,
+                        deny: ['STREAM'],
+                    },
+                ],
             });
 
             var AmongRole = msg.guild.roles.create({
