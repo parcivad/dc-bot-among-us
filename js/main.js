@@ -3,7 +3,9 @@ const fs = require('fs');
 
 // Json hinzufügen
 const config = JSON.parse(fs.readFileSync('../json/config.json'));
-var colors = require('colors');
+const colors = require('colors');
+const color = require('../json/color.json');
+const Embed = require('../js/modules/tools/embed.js');
 
 // Client aufsetzen
 var client = new Discord.Client()
@@ -22,14 +24,15 @@ client.on('ready', () => {
     client.user.setActivity( `in electrical | ${config.prefix}help`, { type: 'LISTENING' });
 
     // Showing the bot user some Informations
-    console.log("----------[Client Informations]----------")
+    console.log("----------[Client Informations]----------".bold)
     console.log("Username: " + client.user.username)
     console.log("User id: " + client.user.id)
     console.log("User avatar: " + client.user.avatar)
     console.log("User tag: " + client.user.tag)
-    console.log("----------[Client Informations]----------")
+    console.log("To Add the Bot to your Server: https://discord.com/oauth2/authorize?client_id=your_apllication_id&scope=bot&permissions=1878523457".gray)
+    console.log("----------[Client Informations]----------".bold)
     console.log(" ")
-    console.log("-> Client online and ready if no error appear!".bold)
+    console.log("-> Client online and ready if no error appear!".underline)
 })
 
 
@@ -55,32 +58,83 @@ function cmd_mute(msg, args) {Mute.command(msg, args);}
 // waiting for the event: message
 client.on('message', (msg) => {
 
+    // some vars that i use
     var cont = msg.content,
         author = msg.member,
         chan = msg.channel,
         guild = msg.guild
 
-    if ( author.id != client.user.id && cont.startsWith(config.prefix)){
+    if (msg.channel.type === 'dm' && msg.author.id != client.user.id) {
+
+        // Sending the User an Information in his DM chat
+        Embed.create(
+            msg.channel,
+            color.orange,
+            "This Bot will not react to any commands in this Chat!",
+            "DM Chat Information",
+            "dm chat"
+        );
+        // Sending into console
+        let message = "The User " + msg.author.tag + " tried to dm the bot!";
+        sendconsole(false, message);
+
+        return true;
+        // Otherwise the Bot will continue
+    } else if ( msg.author.id != client.user.id && cont.startsWith(config.prefix)){
 
         let invoke = cont.split(' ')[0].substr(config.prefix.length),
             args = cont.split(' ').slice(1)
 
         if (invoke in cmdmap) {
 
-            // Data for the Console output
-            let d = new Date();
-            let time= ('0' + d.getHours()).slice(-2)+ ':' + ('0'  + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
-            let strargs = args.join(" ");
+            //Sending into console
+            sendconsole(true, false, invoke, args, msg);
 
-            // Sending Colored or not Colored console output
-            if ( config.consoleColored ) {
-                console.log( time.gray + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke.red + " " + strargs.magenta);
-            } else {
-                console.log( time + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke + " " + strargs);
-            }
             cmdmap[invoke](msg, args)
         }
     }
 });
 
+/***
+ *
+ * @param command is it an Command or not
+ * @param message if its not a command
+ * @param invoke invoke
+ * @param args args
+ * @param msg the message
+ */
+function sendconsole(command, message, invoke, args, msg) {
+
+    // Data for the Console output
+    let d = new Date();
+    let time= ('0' + d.getHours()).slice(-2)+ ':' + ('0'  + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
+
+    // is it a command
+    if ( command && !message ) {
+
+        // Converting Array into String with spaces
+        let strargs = args.join(" ");
+
+        // Sending Colored or not Colored console output COMMAND
+        if ( config.consoleColored ) {
+            console.log( time.gray + " | Der User: " + msg.author.tag + ", executed: " + invoke.red + " " + strargs.yellow);
+        } else {
+            console.log( time + " | Der User: " + msg.author.tag + ", executed: " + invoke + " " + strargs);
+        }
+
+    } else {
+
+        // Sending Colored or not Colored console output MESSAGE
+        if ( config.consoleColored ) {
+            console.log( time.gray + " | Notification: " + message.red);
+        } else {
+            console.log( time + " | Notification: " + message);
+        }
+
+    }
+}
+
+
+// Login bot
+// https://discord.com/oauth2/authorize?client_id=[APPLICATION ID]&scope=bot&permissions=1878523457
 client.login(config.token);

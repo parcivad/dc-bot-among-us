@@ -5,7 +5,7 @@ module.exports = {
     /** The function create is for Embed Creations in Script
      *
      * @param {Discord.Channel} channel The Discord Channel were the Embed will send to
-     * @param col The color of the embed!
+     * @param color The color of the embed!
      * @param {string} content Description of the embed
      * @param {string} title Title of the embed
      * @param {string} footer Footer of the embed
@@ -14,8 +14,8 @@ module.exports = {
      * @returns {*}
      */
     create(channel, color, content, title, footer, thumbnail, image) {
-        var message
-        var embed = new Discord.MessageEmbed()
+        let message
+        let embed = new Discord.MessageEmbed()
             .setColor(color)
         if (content) {
             embed.setDescription(content);
@@ -51,8 +51,8 @@ module.exports = {
      */
     createFields(channel, color, content, title, footer, thumbnail, image) {
 
-        var message
-        var embed = new Discord.MessageEmbed()
+        let message
+        let embed = new Discord.MessageEmbed()
             .setColor(color)
         if (content) {
             var contentArray = content.split('//')
@@ -88,8 +88,8 @@ module.exports = {
      * @returns {*}
      */
     createFieldNumbered(channel, color, content, title, footer, thumbnail, image) {
-        var contentArray = content.split('//')
-        var counter = 0;
+        let contentArray = content.split('//')
+        let counter = 0;
 
         while ( counter != contentArray.length ) {
             nowtext = contentArray[counter]
@@ -101,8 +101,8 @@ module.exports = {
 
         }
 
-        var message
-        var embed = new Discord.MessageEmbed()
+        let message
+        let embed = new Discord.MessageEmbed()
             .setColor(color)
             .setDescription(contentArray)
         if (thumbnail) {
