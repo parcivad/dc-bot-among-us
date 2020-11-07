@@ -26,8 +26,8 @@ map {skeld/mira/polus}
 ## Setup:
 You have to set your Bot Token in `json/config.json`and set a prefix, then your finished and can run the Bot.
 
-To run the Bot you must use this path: dc-bot-among-us/json/
-
+To run the Bot you must use this path: `dc-bot-among-us/json/`
+thats it!
 
 ### The Game:
 You can find the game there:
