@@ -27,7 +27,6 @@ client.on('ready', () => {
     console.log("User id: " + client.user.id)
     console.log("User avatar: " + client.user.avatar)
     console.log("User tag: " + client.user.tag)
-    console.log("To Add the Bot to your Server: https://discord.com/oauth2/authorize?client_id=759757905011539978&scope=bot&permissions=1878523457")
     console.log("----------[Client Informations]----------")
     console.log(" ")
     console.log("-> Client online and ready if no error appear!".bold)
@@ -84,6 +83,4 @@ client.on('message', (msg) => {
     }
 });
 
-// Login bot
-// https://discord.com/oauth2/authorize?client_id=759757905011539978&scope=bot&permissions=1878523457
 client.login(config.token);
