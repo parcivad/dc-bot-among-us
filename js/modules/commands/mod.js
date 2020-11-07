@@ -24,7 +24,39 @@ module.exports = {
                 Embed.createFields(
                     msg.channel,
                     color.purple_dark,
-                    "Mod Changed to: :man_police_officer:" + msg.member.user.username,
+                    "Mod Changed to: :tools:" + msg.member.user.username,
+                    ":hammer: Mod",
+                    "mod changed!"
+                );
+
+
+            } else {
+
+                Embed.createFields(
+                    msg.channel,
+                    color.red,
+                    "No Game is running on your tag! The Owner of your AmongUs Channel can give you mod with: ^mod @User",
+                    ":rotating_light: Game Info",
+                    "error"
+                );
+
+            }
+
+        } else if ( args[0] === "remove" && args.length === 2) {
+
+            if ( msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
+
+                var role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
+                var member = msg.mentions.members.forEach((member) => {
+                    member.roles.remove(role);
+                });
+
+
+
+                Embed.createFields(
+                    msg.channel,
+                    color.purple_dark,
+                    "Mod removed: " + msg.mentions.users.first().username,
                     ":man_police_officer: Mod",
                     "mod changed!"
                 );
@@ -57,8 +89,8 @@ module.exports = {
                 Embed.createFields(
                     msg.channel,
                     color.purple_dark,
-                    "Mod Changed to: :man_police_officer:" + msg.mentions.users.first().username,
-                    ":man_police_officer: Mod",
+                    "Mod Changed to: :tools:" + msg.mentions.users.first().username,
+                    ":hammer: Mod",
                     "mod changed!"
                 );
 
@@ -75,38 +107,15 @@ module.exports = {
 
             }
 
-        }  else if ( args[0] === "remove" && args.length === 2) {
+        } else {
 
-            if ( msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
-
-                var role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
-                var member = msg.mentions.members.forEach((member) => {
-                    member.roles.remove(role);
-                });
-
-
-
-                Embed.createFields(
-                    msg.channel,
-                    color.purple_dark,
-                    "Mod removed: " + msg.mentions.users.first().username,
-                    ":man_police_officer: Mod",
-                    "mod changed!"
-                );
-
-
-            } else {
-
-                Embed.createFields(
-                    msg.channel,
-                    color.red,
-                    "No Game is running on your tag! The Owner of your AmongUs Channel can give you mod with: ^mod @User",
-                    ":rotating_light: Game Info",
-                    "error"
-                );
-
-            }
-
+            Embed.create(
+                msg.channel,
+                color.orange,
+                "^mod {user/remove} {user}",
+                ":classical_building: Mod Command",
+                "mod help"
+            );
         }
     }
 }

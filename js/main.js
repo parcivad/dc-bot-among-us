@@ -15,7 +15,6 @@ const Create = require("./modules/commands/create.js");
 const Delete = require("./modules/commands/delete.js");
 const Mod = require("./modules/commands/mod.js");
 const Mute = require("./modules/commands/mute.js");
-const Offline = require("./modules/commands/offline.js");
 
 // If client is ready it will put out Informations in the console
 client.on('ready', () => {
@@ -44,7 +43,6 @@ const cmdmap = {
     delete: cmd_delete,
     mod: cmd_mod,
     mute: cmd_mute,
-    offline: cmd_offline,
 }
 
 // Functions for the command map
@@ -54,7 +52,6 @@ function cmd_create(msg, args) {Create.command(msg, args);}
 function cmd_delete(msg, args) {Delete.command(msg, args);}
 function cmd_mod(msg, args) {Mod.command(msg, args);}
 function cmd_mute(msg, args) {Mute.command(msg, args);}
-function cmd_offline(msg, args) {Offline.command(msg, args);}
 
 // waiting for the event: message
 client.on('message', (msg) => {
@@ -66,15 +63,17 @@ client.on('message', (msg) => {
 
     if ( author.id != client.user.id && cont.startsWith(config.prefix)){
 
-        var invoke = cont.split(' ')[0].substr(config.prefix.length),
+        let invoke = cont.split(' ')[0].substr(config.prefix.length),
             args = cont.split(' ').slice(1)
 
         if (invoke in cmdmap) {
 
-            var d = new Date();
-            var time= ('0' + d.getHours()).slice(-2)+ ':' + ('0'  + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
+            let d = new Date();
+            let time= ('0' + d.getHours()).slice(-2)+ ':' + ('0'  + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
 
-            console.log( time + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke + " " + args);
+            let strargs = args.join(" ");
+
+            console.log( "%c" + time + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke + " " + strargs, "color:orange");
             cmdmap[invoke](msg, args)
         }
     }
