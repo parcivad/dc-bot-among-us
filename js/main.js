@@ -17,16 +17,18 @@ const Mod = require("./modules/commands/mod.js");
 const Mute = require("./modules/commands/mute.js");
 const Offline = require("./modules/commands/offline.js");
 
-// If client is ready it will put out informations in the console
+// If client is ready it will put out Informations in the console
 client.on('ready', () => {
     // Setting a funny User Status
     client.user.setActivity( `in electrical | ${config.prefix}help`, { type: 'LISTENING' });
 
+    // Showing the bot user some Informations
     console.log("----------[Client Informations]----------")
     console.log("Username: " + client.user.username)
     console.log("User id: " + client.user.id)
     console.log("User avatar: " + client.user.avatar)
     console.log("User tag: " + client.user.tag)
+    console.log("To Add the Bot to your Server: https://discord.com/oauth2/authorize?client_id=759757905011539978&scope=bot&permissions=1878523457")
     console.log("----------[Client Informations]----------")
     console.log(" ")
     console.log("-> Client online and ready if no error appear!")
@@ -44,6 +46,7 @@ const cmdmap = {
     mute: cmd_mute,
     offline: cmd_offline,
 }
+
 // Functions for the command map
 function cmd_help(msg, args) {Help.command(msg, args);}
 function cmd_map(msg, args) {Map.command(msg, args);}
@@ -67,13 +70,16 @@ client.on('message', (msg) => {
             args = cont.split(' ').slice(1)
 
         if (invoke in cmdmap) {
+
             var d = new Date();
-            console.log( d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke + " " +args);
+            var time= ('0' + d.getHours()).slice(-2)+ ':' + ('0'  + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
+
+            console.log( time + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke + " " + args);
             cmdmap[invoke](msg, args)
         }
     }
 });
 
 // Login bot
-// https://discord.com/oauth2/authorize?client_id=752116813638402068&scope=bot&permissions=8
+// https://discord.com/oauth2/authorize?client_id=759757905011539978&scope=bot&permissions=1878523457
 client.login(config.token);

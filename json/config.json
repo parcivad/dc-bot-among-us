@@ -1,5 +1,5 @@
 {
   "token": "put here your token in",
-  "prefix": "the bot prefix",
-  "everyoneRoleId": "a Role that everyone has"
+  "prefix": "thats the bot prefix",
+  "everyoneRoleId": "a role that everyone has, like a Member role!"
 }

@@ -5,7 +5,8 @@
   "main": "../js/index.js",
   "scripts": {
     "test": "node ../js/main.js debug",
-    "start": "node ../js/main.js "
+    "start": "node ../js/main.js ",
+    "stop": "node stop.../js/main.js"
   },
   "keywords": [],
   "author": "",
