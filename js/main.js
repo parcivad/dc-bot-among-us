@@ -18,6 +18,10 @@ const Delete = require("./modules/commands/delete.js");
 const Mod = require("./modules/commands/mod.js");
 const Mute = require("./modules/commands/mute.js");
 
+
+if ( !config.token ) { console.log("THE BOT NEEDS A APPLICATION TOKEN! please put the token in: config.json in".red); return true;}
+
+
 // If client is ready it will put out Informations in the console
 client.on('ready', () => {
     // Setting a funny User Status
