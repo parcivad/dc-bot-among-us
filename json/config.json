@@ -1,5 +1,6 @@
 {
-  "token": "put here your code in",
-  "prefix": " the bot prefix",
-  "everyoneRoleId": "a role that everyone has, like @everyone or @Member"
+  "token": "put here your bot token in",
+  "prefix": "the bot prefix",
+  "everyoneRoleId": "a role that everyone has like @everyone or @Member",
+  "consoleColored": true
 }

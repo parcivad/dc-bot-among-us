@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // Json hinzufügen
 const config = JSON.parse(fs.readFileSync('../json/config.json'));
-const color = JSON.parse(fs.readFileSync('../json/color.json'));
+var colors = require('colors');
 
 // Client aufsetzen
 var client = new Discord.Client()
@@ -30,7 +30,7 @@ client.on('ready', () => {
     console.log("To Add the Bot to your Server: https://discord.com/oauth2/authorize?client_id=759757905011539978&scope=bot&permissions=1878523457")
     console.log("----------[Client Informations]----------")
     console.log(" ")
-    console.log("-> Client online and ready if no error appear!")
+    console.log("-> Client online and ready if no error appear!".bold)
 })
 
 
@@ -68,12 +68,17 @@ client.on('message', (msg) => {
 
         if (invoke in cmdmap) {
 
+            // Data for the Console output
             let d = new Date();
             let time= ('0' + d.getHours()).slice(-2)+ ':' + ('0'  + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2);
-
             let strargs = args.join(" ");
 
-            console.log( "%c" + time + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke + " " + strargs, "color:orange");
+            // Sending Colored or not Colored console output
+            if ( config.consoleColored ) {
+                console.log( time.gray + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke.red + " " + strargs.magenta);
+            } else {
+                console.log( time + " | Der User: " + msg.author.tag + ", nutze den Befehl: " + invoke + " " + strargs);
+            }
             cmdmap[invoke](msg, args)
         }
     }
