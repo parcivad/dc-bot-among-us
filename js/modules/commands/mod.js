@@ -2,7 +2,8 @@ const Discord = require('discord.js')
 
 // Adding Json
 const fs = require('fs')
-const color = JSON.parse(fs.readFileSync('../json/color.json'))
+const color = JSON.parse(fs.readFileSync('../json/color.json'));
+const config = JSON.parse(fs.readFileSync('../json/config.json'));
 
 // Adding JS
 const Embed = require('../tools/embed.js');
@@ -44,38 +45,53 @@ module.exports = {
 
         } else if (args[0] === "remove" && args.length === 2) {
 
-            if (msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
+            if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
 
-                var role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
-                var member = msg.mentions.members.forEach((member) => {
-                    member.roles.remove(role);
-                });
+                if (msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
+
+                    var role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
+                    var member = msg.mentions.members.forEach((member) => {
+                        member.roles.remove(role);
+                    });
 
 
-                Embed.createFields(
-                    msg.channel,
-                    color.purple_dark,
-                    "Mod removed: " + msg.mentions.users.first().username,
-                    ":man_police_officer: Mod",
-                    "mod changed!"
-                );
+                    Embed.createFields(
+                        msg.channel,
+                        color.purple_dark,
+                        "Mod removed: " + msg.mentions.users.first().username,
+                        ":man_police_officer: Mod",
+                        "mod changed!"
+                    );
 
+
+                } else {
+
+                    Embed.createFields(
+                        msg.channel,
+                        color.red,
+                        "No Game is running on your tag! The Owner of your AmongUs Channel can give you mod with: ^mod @User",
+                        ":rotating_light: Game Info",
+                        "error"
+                    );
+
+                }
 
             } else {
 
                 Embed.createFields(
                     msg.channel,
                     color.red,
-                    "No Game is running on your tag! The Owner of your AmongUs Channel can give you mod with: ^mod @User",
-                    ":rotating_light: Game Info",
-                    "error"
+                    "Please name a Person like: ^mod remove @DiedInElectrical",
+                    ":rotating_light: Mod",
+                    "mod error"
                 );
 
             }
+        }
 
-        } else if (args.length === 1) {
+         else if (args.length === 1) {
 
-            if ( msg.mentions.members.first() ) {
+            if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
 
                 if (msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
 

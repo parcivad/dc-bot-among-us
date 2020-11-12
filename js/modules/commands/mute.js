@@ -24,7 +24,7 @@ module.exports = {
 
                         // Muting each Voice Channel
                         voiceMembers.forEach(member => {
-                            member.voice.setMute(true)
+                            member.voice.setMute(true);
                         });
 
                         // Message
@@ -60,6 +60,98 @@ module.exports = {
                             "https://cdn.discordapp.com/attachments/752122843512438905/774382251202969600/5a8492b7c97473382778e22d9e1b2926.png"
                         );
 
+                    } else if ( args.length === 2 && args[1] === "on") {
+
+                        // Checking Mention in the Command
+                        if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
+                            // Member to mute
+                            let voiceMember = msg.mentions.members.first();
+
+                            if ( voiceMember.voice.channel.name.split("#")[0] === "AmongUs ") {
+
+                                if ( voiceMember.voice.channel ) {
+
+                                    voiceMember.voice.setMute(true);
+
+                                } else {
+
+                                    // Help message
+                                    Embed.create(
+                                        msg.channel,
+                                        color.red,
+                                        "Can´t find Person to mute!",
+                                        ":rotating_light: Mute",
+                                        "mute help"
+                                    );
+                                }
+                            } else {
+
+                                // Help message
+                                Embed.create(
+                                    msg.channel,
+                                    color.red,
+                                    "Person isn´t in your AmongUs Game!",
+                                    ":rotating_light: Mute",
+                                    "mute help"
+                                );
+                            }
+                        } else {
+
+                            // Help message
+                            Embed.create(
+                                msg.channel,
+                                color.red,
+                                "Please use the Command like this: ^mute @DiedInElectrical {on/off}",
+                                ":rotating_light: Mute",
+                                "mute help"
+                            );
+                        }
+                    } else if ( args.length === 2 && args[1] === "off") {
+
+                        // Checking Mention in the Command
+                        if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
+                            // Member to mute
+                            let voiceMember = msg.mentions.members.first();
+
+                            if ( voiceMember.voice.channel.name.split("#")[0] === "AmongUs ") {
+
+                                if ( voiceMember.voice.channel ) {
+
+                                    voiceMember.voice.setMute(false);
+
+                                } else {
+
+                                    // Help message
+                                    Embed.create(
+                                        msg.channel,
+                                        color.red,
+                                        "Can´t find Person to mute!",
+                                        ":rotating_light: Mute",
+                                        "mute help"
+                                    );
+                                }
+                            } else {
+
+                                // Help message
+                                Embed.create(
+                                    msg.channel,
+                                    color.red,
+                                    "Person isn´t in your AmongUs Game!",
+                                    ":rotating_light: Mute",
+                                    "mute help"
+                                );
+                            }
+                        } else {
+
+                            // Help message
+                            Embed.create(
+                                msg.channel,
+                                color.red,
+                                "Please use the Command like this: ^mute @DiedInElectrical {on/off}",
+                                ":rotating_light: Mute",
+                                "mute help"
+                            );
+                        }
                     } else {
 
                         //Message
