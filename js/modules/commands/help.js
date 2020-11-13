@@ -11,7 +11,7 @@ module.exports = {
 
     command(msg, args) {
 
-
+        // Sending Embed for the Basic Commands
         Embed.createFields(
             msg.channel,
             color.green,
@@ -19,6 +19,7 @@ module.exports = {
             ":game_die:Basic Command"
         );
 
+        // Sending Embed for the Mod Commands
         Embed.createFields(
             msg.channel,
             color.red,
@@ -26,6 +27,7 @@ module.exports = {
             ":classical_building:Mod Command"
         );
 
+        // Sending Embed for the Mute Command
         Embed.createFields(
             msg.channel,
             color.yellow,

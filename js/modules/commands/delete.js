@@ -11,22 +11,18 @@ module.exports = {
 
     command(msg, args) {
 
-        var usertag = msg.member.user.tag.split("#");
+        // Users Tag
+        let usertag = msg.member.user.tag.split("#");
 
+        // Is there a Voice Channel on the Tag
         if ( msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1]) ) {
 
+            // Deleting the Voice Channel
             msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1]).delete();
-            if ( !msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1])) {
-                Embed.create(
-                    msg.channel,
-                    color.red,
-                    "You have no Permission for this Action",
-                    ":red_square: Cancel!",
-                );
-                return
-            }
+            // Deleting the Mod Role
             msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]).delete();
 
+            // Sending Embed
             Embed.create(
                 msg.channel,
                 color.red,
@@ -36,6 +32,7 @@ module.exports = {
 
         } else {
 
+            // Sending Embed
             Embed.create(
                 msg.channel,
                 color.red,

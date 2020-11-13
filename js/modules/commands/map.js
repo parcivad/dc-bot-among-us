@@ -13,6 +13,7 @@ module.exports = {
 
         if ( args[0] == null ) {
 
+            // Sending Help Embed for the Skeld Map
             Embed.createFieldNumbered(
                 msg.channel,
                 color.orange,
@@ -22,8 +23,9 @@ module.exports = {
                 "https://cdn-www.bluestacks.com/bs-images/89cfc0bdd6e77f409b33c59d5289b155.png",
             )
 
-        } else if (( args[0] === "skeld" || args[0] === "Skeld") && args.length === 1 ) {
+        } else if ( args[0].toUpperCase() === "SKELD" && args.length === 1 ) {
 
+            // Sending Embed with skled map
             Embed.createFields(
                 msg.channel,
                 color.gray,
@@ -34,8 +36,9 @@ module.exports = {
                 "https://u.cubeupload.com/SuperInky/skeldmapguidev2.png"
 
             )
-        } else if (( args[0] === "mira" || args[0] === "Mira") && args.length === 1 ) {
+        } else if ( args[0].toUpperCase() === "MIRA" && args.length === 1 ) {
 
+            // Sending Embed with Mira map
             Embed.createFields(
                 msg.channel,
                 color.yellow,
@@ -46,8 +49,9 @@ module.exports = {
                 "https://i.redd.it/8i1kd1mp9ij51.png"
 
             )
-        } else if (( args[0] === "polus" || args[0] === "Polus") && args.length === 1 ) {
+        } else if ( args[0].toUpperCase() === "POLUS" && args.length === 1 ) {
 
+            // Sending Embed with Polus map
             Embed.createFields(
                 msg.channel,
                 color.purple_dark,

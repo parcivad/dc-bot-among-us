@@ -13,15 +13,20 @@ module.exports = {
 
     command(msg, args) {
 
-        var usertag = msg.member.user.tag.split("#");
+        // Users Tag
+        let usertag = msg.member.user.tag.split("#");
 
+        // Command looks like: ^mod
         if (args.length === 0) {
 
+            // Has the Person a open AmongUs game
             if (msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
 
-                var role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
+                // Creating the Role and adding it to the Player
+                let role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
                 msg.member.roles.add(role);
 
+                // Sending Embed
                 Embed.createFields(
                     msg.channel,
                     color.purple_dark,
@@ -33,6 +38,7 @@ module.exports = {
 
             } else {
 
+                // Sending Embed
                 Embed.createFields(
                     msg.channel,
                     color.red,
@@ -43,18 +49,22 @@ module.exports = {
 
             }
 
+        // Command looks like: ^mod remove @user
         } else if (args[0] === "remove" && args.length === 2) {
 
+            // Checking Mention
             if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
 
+                // Has the owner a open Game
                 if (msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
 
-                    var role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
-                    var member = msg.mentions.members.forEach((member) => {
+                    // Finding Role and removing it from the Player
+                    let role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
+                    let member = msg.mentions.members.forEach((member) => {
                         member.roles.remove(role);
                     });
 
-
+                    // Sending Embed
                     Embed.createFields(
                         msg.channel,
                         color.purple_dark,
@@ -66,6 +76,7 @@ module.exports = {
 
                 } else {
 
+                    // Sending Embed
                     Embed.createFields(
                         msg.channel,
                         color.red,
@@ -78,6 +89,7 @@ module.exports = {
 
             } else {
 
+                // Sending Embed
                 Embed.createFields(
                     msg.channel,
                     color.red,
@@ -87,21 +99,24 @@ module.exports = {
                 );
 
             }
-        }
 
-         else if (args.length === 1) {
+        // Commands could like: ^mod @user
+        } else if (args.length === 1) {
 
+            // Checking Mention
             if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
 
+                // Has the owner a open game
                 if (msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
 
-                    var role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
-                    var member = msg.mentions.members.forEach((member) => {
+                    // Finding role
+                    let role = msg.guild.roles.cache.find(role => role.name === "AmongUsChannel #" + usertag[1]);
+                    let member = msg.mentions.members.forEach((member) => {
                         member.roles.add(role);
                     });
                     msg.member.roles.remove(role);
 
-
+                    // Sending Embed
                     Embed.createFields(
                         msg.channel,
                         color.purple_dark,
@@ -109,10 +124,9 @@ module.exports = {
                         ":hammer: Mod",
                         "mod changed!"
                     );
-
-
                 } else {
 
+                    // Sending Embed
                     Embed.createFields(
                         msg.channel,
                         color.red,
@@ -120,11 +134,10 @@ module.exports = {
                         ":rotating_light: Game Info",
                         "error"
                     );
-
                 }
-
             } else {
 
+                // Sending Embed
                 Embed.createFields(
                     msg.channel,
                     color.red,
@@ -132,11 +145,10 @@ module.exports = {
                     ":rotating_light: Mod",
                     "mod error"
                 );
-
             }
-
         } else {
 
+            // Sending Embed
             Embed.create(
                 msg.channel,
                 color.orange,

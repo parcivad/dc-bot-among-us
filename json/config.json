@@ -1,6 +1,9 @@
 {
-  "token": "put here your application token in",
-  "prefix": "^",
-  "everyoneRoleId": "a role that everyone has like @everyone",
+  "token": "your Bot Token",
+  "prefix": "your Bot Prefix",
+
+  "everyoneRoleId": "id of a role that everyone has",
+  "category": "id where you want the AmongUs Channel created in",
+
   "consoleColored": true
 }

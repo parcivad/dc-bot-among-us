@@ -12,15 +12,15 @@ module.exports = {
 
     command(msg, args) {
 
-        var usertag = msg.member.user.tag.split("#");
+        // Users Tag
+        let usertag = msg.member.user.tag.split("#");
 
         if ( !msg.guild.channels.cache.find(channel => channel.name === "AmongUs #" + usertag[1])) {
 
-
-
-            var AmongVoice = msg.guild.channels.create( "AmongUs #" + usertag[1], {
+            // Creating AmongUs Channel
+            let AmongVoice = msg.guild.channels.create( "AmongUs #" + usertag[1], {
                 type: 'voice',
-                parent: msg.guild.channels.cache.find(c => c.name == "▬▬ Among Us ▬▬" && c.type == "category"),
+                parent: msg.guild.channels.cache.find(c => c.id == config.category && c.type == "category"),
                 userLimit: 10,
                 permissionOverwrites: [
                     {
@@ -30,7 +30,8 @@ module.exports = {
                 ],
             });
 
-            var AmongRole = msg.guild.roles.create({
+            // Creating Mod Role for the Channel
+            let AmongRole = msg.guild.roles.create({
                 data: {
                     name: "AmongUsChannel #" + usertag[1],
                     color: color.orange,
@@ -38,6 +39,7 @@ module.exports = {
                 reason: "For Moderation in the Among Us Channels",
             });
 
+            // Sending Information Embed
             Embed.createFields(
                 msg.channel,
                 color.green,
@@ -49,10 +51,11 @@ module.exports = {
 
         } else {
 
+            // Sending Embed
             Embed.create(
                 msg.channel,
                 color.red,
-                "A Game is on your tag running",
+                "A Game is running on your tag",
                 ":rotating_light: Game Info",
                 "error"
             );
