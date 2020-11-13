@@ -18,140 +18,202 @@ module.exports = {
 
                     if ( args[0] === "on") {
 
-                        // Getting some Data
-                        let voiceChannel = msg.member.voice.channel;
-                        let voiceMembers = voiceChannel.members;
+                        // START: MUTE ON
+                        if ( msg.member.voice.channel ) {
 
-                        // Muting each Voice Channel
-                        voiceMembers.forEach(member => {
-                            member.voice.setMute(true);
-                        });
+                            // Getting some Data
+                            let voiceChannel = msg.member.voice.channel;
+                            let voiceMembers = voiceChannel.members;
 
-                        // Message
-                        Embed.create(
-                            msg.channel,
-                            color.orange,
-                            "Muted your Voice Channel!",
-                            "SHHHHHHH",
-                            "mute command executed",
-                            false,
-                            "https://cdn.discordapp.com/attachments/752122843512438905/760153998123597834/shh.png"
-                        );
+                            // Muting each Voice Channel
+                            voiceMembers.forEach(member => {
+                                member.voice.setMute(true);
+                            });
+
+                            // Message
+                            Embed.create(
+                                msg.channel,
+                                color.orange,
+                                "Muted your Voice Channel!",
+                                "SHHHHHHH",
+                                "mute command executed",
+                                false,
+                                "https://cdn.discordapp.com/attachments/752122843512438905/760153998123597834/shh.png"
+                            );
+                        }
+                        // END: MUTE ON
 
                     } else if (args[0] === "off") {
 
-                        // Getting some Data
-                        let voiceChannel = msg.member.voice.channel;
-                        let voiceMembers = voiceChannel.members;
+                        // START: MUTE OFF
+                        if ( msg.member.voice.channel ) {
 
-                        // Muting each Voice Channel
-                        voiceMembers.forEach(member => {
-                            member.voice.setMute(false);
-                        });
+                            // Getting some Data
+                            let voiceChannel = msg.member.voice.channel;
+                            let voiceMembers = voiceChannel.members;
 
-                        // Message
-                        Embed.create(
-                            msg.channel,
-                            color.orange,
-                            "Unmuted your Voice Channel!",
-                            "Discuss!",
-                            "mute command executed",
-                            false,
-                            "https://cdn.discordapp.com/attachments/752122843512438905/774382251202969600/5a8492b7c97473382778e22d9e1b2926.png"
-                        );
+                            // Muting each Voice Channel
+                            voiceMembers.forEach(member => {
+                                member.voice.setMute(false);
+                            });
+
+                            // Message
+                            Embed.create(
+                                msg.channel,
+                                color.orange,
+                                "Unmuted your Voice Channel!",
+                                "Discuss!",
+                                "mute command executed",
+                                false,
+                                "https://cdn.discordapp.com/attachments/752122843512438905/774382251202969600/5a8492b7c97473382778e22d9e1b2926.png"
+                            );
+                        }
+                        // END: MUTE OFF
 
                     } else if ( args.length === 2 && args[1] === "on") {
 
-                        // Checking Mention in the Command
+                        // START: MUTE USER ON
+                        // Checking the Mention in the Command
                         if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
                             // Member to mute
                             let voiceMember = msg.mentions.members.first();
+                            // Is Member to mute in a voiceChannel
+                            if ( voiceMember.voice.channel ) {
+                                // Is it a AmongUs Channel
+                                if ( voiceMember.voice.channel.name.split('#')[0] === "AmongUs " ) {
+                                    //Person to mute === Person muting
+                                    if ( voiceMember.voice.channel.name.split("#")[1] === msg.member.voice.channel.name.split("#")[1]) {
+                                        // Muting person
 
-                            if ( voiceMember.voice.channel.name.split("#")[0] === "AmongUs ") {
+                                        voiceMember.voice.setMute(true);
 
-                                if ( voiceMember.voice.channel ) {
+                                        Embed.create(
+                                            msg.channel,
+                                            color.red,
+                                            "The User is now muted!",
+                                            "Mute",
+                                            "mute command executed"
+                                        )
 
-                                    voiceMember.voice.setMute(true);
+                                    } else {
 
+                                        //Sending Embed
+                                        Embed.create(
+                                            msg.channel,
+                                            color.red,
+                                            "Person isn´t in your Game!",
+                                            "Mute",
+                                            "mute command"
+                                        );
+                                    }
                                 } else {
 
-                                    // Help message
+                                    //Sending Embed
                                     Embed.create(
                                         msg.channel,
                                         color.red,
-                                        "Can´t find Person to mute!",
-                                        ":rotating_light: Mute",
-                                        "mute help"
-                                    );
+                                        "You can only mute Persons who are in your Game",
+                                        "Mute",
+                                        "mute command"
+                                    )
+
                                 }
                             } else {
 
-                                // Help message
+                                // Sending Embed
                                 Embed.create(
                                     msg.channel,
                                     color.red,
-                                    "Person isn´t in your AmongUs Game!",
-                                    ":rotating_light: Mute",
-                                    "mute help"
-                                );
+                                    "Person isn´t in a Voice Chat",
+                                    "Mute",
+                                    "mute command"
+                                )
                             }
                         } else {
 
-                            // Help message
-                            Embed.create(
+                            // Sending Embed
+                            Embed.createFields(
                                 msg.channel,
-                                color.red,
-                                "Please use the Command like this: ^mute @DiedInElectrical {on/off}",
-                                ":rotating_light: Mute",
-                                "mute help"
+                                color.orange,
+                                "Command://^mute {@user} {on/off}",
+                                "Mute Help",
+                                "mute help command"
                             );
                         }
+                        // END: MOD USER ON
+
                     } else if ( args.length === 2 && args[1] === "off") {
 
-                        // Checking Mention in the Command
+                        // START: MUTE USER ON
+                        // Checking the Mention in the Command
                         if ( msg.mentions.members.first() && msg.mentions.members.first().id !== msg.author.id ) {
                             // Member to mute
                             let voiceMember = msg.mentions.members.first();
+                            // Is Member to mute in a voiceChannel
+                            if ( voiceMember.voice.channel ) {
+                                // Is it a AmongUs Channel
+                                if ( voiceMember.voice.channel.name.split('#')[0] === "AmongUs " ) {
+                                    //Person to mute === Person muting
+                                    if ( voiceMember.voice.channel.name.split("#")[1] === msg.member.voice.channel.name.split("#")[1]) {
+                                        // Muting person
 
-                            if ( voiceMember.voice.channel.name.split("#")[0] === "AmongUs ") {
+                                        voiceMember.voice.setMute(false);
 
-                                if ( voiceMember.voice.channel ) {
+                                        Embed.create(
+                                            msg.channel,
+                                            color.green,
+                                            "The User is now unmuted!",
+                                            "Mute",
+                                            "mute command executed"
+                                        )
 
-                                    voiceMember.voice.setMute(false);
+                                    } else {
 
+                                        //Sending Embed
+                                        Embed.create(
+                                            msg.channel,
+                                            color.red,
+                                            "Person isn´t in your Game!",
+                                            "Mute",
+                                            "mute command"
+                                        );
+                                    }
                                 } else {
 
-                                    // Help message
+                                    //Sending Embed
                                     Embed.create(
                                         msg.channel,
                                         color.red,
-                                        "Can´t find Person to mute!",
-                                        ":rotating_light: Mute",
-                                        "mute help"
-                                    );
+                                        "You can only mute Persons who are in your Game",
+                                        "Mute",
+                                        "mute command"
+                                    )
+
                                 }
                             } else {
 
-                                // Help message
+                                // Sending Embed
                                 Embed.create(
                                     msg.channel,
                                     color.red,
-                                    "Person isn´t in your AmongUs Game!",
-                                    ":rotating_light: Mute",
-                                    "mute help"
-                                );
+                                    "Person isn´t in a Voice Chat",
+                                    "Mute",
+                                    "mute command"
+                                )
                             }
                         } else {
 
-                            // Help message
-                            Embed.create(
+                            // Sending Embed
+                            Embed.createFields(
                                 msg.channel,
-                                color.red,
-                                "Please use the Command like this: ^mute @DiedInElectrical {on/off}",
-                                ":rotating_light: Mute",
-                                "mute help"
+                                color.orange,
+                                "Command://^mute {@user} {on/off}",
+                                "Mute Help",
+                                "mute help command"
                             );
                         }
+                        // END: MOD USER ON
+
                     } else {
 
                         //Message
@@ -162,10 +224,7 @@ module.exports = {
                             "Mute help",
                             "^help",
                         );
-
                     }
-
-
                 } else {
 
                     // User have no mute permission
@@ -176,7 +235,6 @@ module.exports = {
                         "Permission Error",
                         "error mute command"
                     );
-
                 }
             } else {
 
@@ -188,7 +246,6 @@ module.exports = {
                     "Can´t mute",
                     "error mute command"
                 );
-
             }
         } else {
 
@@ -200,7 +257,6 @@ module.exports = {
                 "Can´t mute",
                 "error mute command"
             );
-
         }
     }
 }
