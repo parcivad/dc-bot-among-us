@@ -1,6 +1,8 @@
 # AmongUs Discord Bot
 Bot to manage Channels and Permissions for the game AmongUs.
 
+[![Discord](https://img.shields.io/discord/690934524955197471?label=Discord&logo=discord)](https://discord.gg/MFhh5XEM2b)
+
 ## Features:
 Some of the Bot Features:
 
