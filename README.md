@@ -1,4 +1,5 @@
 # AmongUs Discord Bot
+Privat runnable Bot, own application needed! 
 Bot to manage Channels and Permissions for the game AmongUs.
 
 [![Discord](https://img.shields.io/discord/690934524955197471?label=Discord&logo=discord)](https://discord.gg/MFhh5XEM2b)
